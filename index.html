@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>The Monty Hall Problem</h1>
+    <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        //pick a random number between 1, 2, 3
+    
+        var switchCounter = 0;
+        var stayCounter = 0;    
+        for (var j =0; j < 1000; j ++) {
+            var car = getRandomInt(3) +1;
+            document.write('<p>The car is in door ' + car + '</p>');
+
+            //create a variable to hold the choice of the player
+            var playerChoice = getRandomInt(3) + 1;
+            document.write('<p>The player has chosen door ' + playerChoice + '</p>');
+
+            //the host removes a door that does not have the car and is not the player's choice
+            var hostChoice = 0;
+            for (var i = 1; i <= 3; i++) {
+                if (i !== car && i !== playerChoice) {
+                    hostChoice = i;
+                    break;
+                }
+            }
+
+            
+            // do {
+            //     var hostChoice = getRandomInt(3) + 1;
+            // } while (hostChoice == car || hostChoice == playerChoice);
+            // document.write('<p>The host has removed door ' + hostChoice + '</p>');
+
+            if (car == playerChoice) {
+                stayCounter++;
+                document.write("<p style ='color:green;'>Contestant should stay</p>");
+            } else {
+                switchCounter++;
+                document.write("<p style ='color:red;'>Contestant should switch</p>");
+            }
+        }
+        var stayPercentage = (stayCounter / (stayCounter + switchCounter) * 100).toFixed(2);
+        var switchPercentage = (switchCounter / (stayCounter + switchCounter) * 100).toFixed(2);
+        document.write("<h2>Contestant should stay " + stayPercentage + " % of times</h2>");
+        document.write("<h2>Contestant should switch " + switchPercentage + " % of times</h2>");
+    </script>
+    
+</body>
+
+
+</html>
